@@ -27,6 +27,8 @@ createApp({
             ).then(response => {
                 this.todoList = response.data;
                 this.todoItem = '';
+            }).catch(error => {
+                alert(error.response.data);
             });
         }
     },
