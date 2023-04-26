@@ -4,7 +4,10 @@ createApp({
     data() {
         return {
             todoList: [],
-            todoItem: ''
+            todoItem:   {
+                            'text': '',
+                            'done': false
+                        }
         }
     },
     methods: {
@@ -15,9 +18,9 @@ createApp({
             })
         },
         addTodo() {
-
+            
             const data = {
-                ciccio: this.todoItem
+                newTodo: this.todoItem
             };
 
             axios.post('server.php', data,
@@ -26,8 +29,57 @@ createApp({
             }
             ).then(response => {
                 this.todoList = response.data;
-                this.todoItem = '';
+                this.todoItem.text = '';
             });
+            
+        },
+        setDone(index) {
+            console.log(index);
+
+            const data = {
+                setTodoDone: index
+            }
+
+            axios.post('server.php', data,
+                {
+                    headers: { 'Content-Type': 'multipart/form-data'}
+                }
+            ).then(response => {
+                this.todoList = response.data;
+            });
+
+        },
+        toggleDone(index) {
+            console.log(index);
+
+            const data = {
+                toggleTodoDone: index
+            }
+
+            axios.post('server.php', data,
+                {
+                    headers: { 'Content-Type': 'multipart/form-data'}
+                }
+            ).then(response => {
+                this.todoList = response.data;
+            });
+
+        },
+        deleteTodo(index) {
+            console.log(index);
+
+            const data = {
+                deletedTodo: index
+            }
+
+            axios.post('server.php', data,
+                {
+                    headers: { 'Content-Type': 'multipart/form-data'}
+                }
+            ).then(response => {
+                this.todoList = response.data;
+            });
+
         }
     },
     mounted() {
