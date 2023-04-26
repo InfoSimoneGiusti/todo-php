@@ -20,14 +20,12 @@ if (file_exists('database.json')) {
     ];
 }
 
-
-
 if (isset($_POST['newTodo'])) {
+
     $todoList[] = [
         'text' => $_POST['newTodo']['text'],
         'done' => $_POST['newTodo']['done'] === "true"?true:false
     ];
-
     file_put_contents('database.json', json_encode($todoList));
 
 } else if (isset($_POST['setTodoDone'])) {
